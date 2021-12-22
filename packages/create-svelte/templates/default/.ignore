@@ -1,0 +1,7 @@
+.meta.json
+package.json
+netlify.toml
+wrangler.toml
+vercel.json
+.cloudflare
+.netlify

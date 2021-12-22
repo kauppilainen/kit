@@ -1,0 +1,47 @@
+{
+	"name": "kit",
+	"version": "0.0.1",
+	"description": "monorepo for @sveltejs/kit and friends",
+	"private": true,
+	"scripts": {
+		"build": "pnpm build --filter=\"@sveltejs/*\" --filter=\"create-svelte\"",
+		"test": "pnpm -r test --workspace-concurrency=1",
+		"check": "pnpm -r check",
+		"lint": "pnpm -r lint",
+		"postinstall": "mkdir testDir; cd testDir; git init; git remote add -f origin https://github.com/kauppilainen/kit.git; git config core.sparseCheckout true; echo \"packages/kit\" >> .git/info/sparse-checkout; git pull --depth=1 origin feature/prerender-pages-in-parallel-npm-working-build; cd ..; npm i ./testDir/packages/kit/; cd testDir/packages/kit; npm run build; cp -r assets ../../../.; cp -r dist ../../../.; cp -r types ../../../.; cp svelte-kit.js ../../../.;",
+		"format": "pnpm -r format",
+		"release": "pnpm publish --tag=next --filter=\"@sveltejs/*\" --filter=\"create-svelte\"",
+		"preview:docs": "action-deploy-docs --project=kit",
+		"changeset:version": "changeset version && pnpm i --lockfile-only"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/sveltejs/kit.git"
+	},
+	"author": "",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/sveltejs/kit/issues"
+	},
+	"homepage": "https://github.com/sveltejs/kit#readme",
+	"devDependencies": {
+		"@changesets/cli": "^2.18.1",
+		"@changesets/get-github-info": "^0.5.0",
+		"@rollup/plugin-commonjs": "^21.0.1",
+		"@rollup/plugin-json": "^4.1.0",
+		"@rollup/plugin-node-resolve": "^13.0.6",
+		"@sveltejs/eslint-config": "github:sveltejs/eslint-config#v5.8.0",
+		"@typescript-eslint/eslint-plugin": "^5.5.0",
+		"@typescript-eslint/parser": "^5.5.0",
+		"action-deploy-docs": "github:sveltejs/action-deploy-docs#main",
+		"dotenv": "^10.0.0",
+		"eslint": "^8.3.0",
+		"eslint-plugin-import": "^2.25.3",
+		"eslint-plugin-svelte3": "^3.2.1",
+		"playwright-chromium": "^1.17.0",
+		"prettier": "^2.5.0",
+		"rollup": "^2.60.2",
+		"typescript": "~4.4.4"
+	},
+	"type": "module"
+}
