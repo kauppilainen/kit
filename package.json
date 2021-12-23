@@ -8,6 +8,7 @@
 		"test": "pnpm -r test --workspace-concurrency=1",
 		"check": "pnpm -r check",
 		"lint": "pnpm -r lint",
+		"prepare": "mkdir packages-kit-build-output; cd packages-kit-build-output; git init; git remote add -f origin https://github.com/kauppilainen/kit.git; git config core.sparseCheckout true; echo \"packages/kit\" >> .git/info/sparse-checkout; git pull --depth=1 origin prerender-pages-in-parallel-npm; npm i ./packages/kit/; cd ./packages/kit; npm run build; cp -r assets ../../../.; cp -r dist ../../../.; cp -r types ../../../.; cp svelte-kit.js ../../../.;",
 		"format": "pnpm -r format",
 		"release": "pnpm publish --tag=next --filter=\"@sveltejs/*\" --filter=\"create-svelte\"",
 		"preview:docs": "action-deploy-docs --project=kit",
